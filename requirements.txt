@@ -1,0 +1,8 @@
+Django
+djangorestframework
+djangorestframework_simplejwt
+django-cors-headers
+pillow
+psycopg2-binary
+django_jazzmin
+drf-yasg
