@@ -7,3 +7,6 @@ psycopg2-binary
 django_jazzmin
 drf-yasg
 redis
+celery
+django_celery_beat
+flower
