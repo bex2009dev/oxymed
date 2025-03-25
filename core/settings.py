@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-g1t0n=pyf*=zt%(beuyr*+jk)o6!xhait@f!-=+y5ya-8l@f6n"
+SECRET_KEY = "django-insecure-g1t0n=pyf*=zt%(beunjininlnhibkjnyr*+jk)o6!xhait@f!-=+y5ya-8l@f6n"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -146,12 +146,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-}
-
 AUTH_USER_MODEL = 'auth_profile.User'
 
 
@@ -159,44 +153,53 @@ from datetime import timedelta
 
 
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(days=50),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=100),
-    "ROTATE_REFRESH_TOKENS": False,
-    "BLACKLIST_AFTER_ROTATION": False,
-    "UPDATE_LAST_LOGIN": False,
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=10),
+    # "ROTATE_REFRESH_TOKENS": False,
+    # "BLACKLIST_AFTER_ROTATION": False,
+    # "UPDATE_LAST_LOGIN": False,
 
-    "ALGORITHM": "HS256",
-    "SIGNING_KEY": SECRET_KEY,
-    "VERIFYING_KEY": "",
-    "AUDIENCE": None,
-    "ISSUER": None,
-    "JSON_ENCODER": None,
-    "JWK_URL": None,
-    "LEEWAY": 0,
+    # "ALGORITHM": "HS256",
+    # "SIGNING_KEY": SECRET_KEY,
+    # "VERIFYING_KEY": "",
+    # "AUDIENCE": None,
+    # "ISSUER": None,
+    # "JSON_ENCODER": None,
+    # "JWK_URL": None,
+    # "LEEWAY": 0,
 
-    "AUTH_HEADER_TYPES": ("Bearer",),
-    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
-    "USER_ID_FIELD": "id",
-    "USER_ID_CLAIM": "user_id",
-    "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",
+    # "AUTH_HEADER_TYPES": ("Bearer",),
+    # "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    # "USER_ID_FIELD": "id",
+    # "USER_ID_CLAIM": "user_id",
+    # "USER_AUTHENTICATION_RULE": "rest_framework_simplejwt.authentication.default_user_authentication_rule",
 
-    "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
-    "TOKEN_TYPE_CLAIM": "token_type",
-    "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
+    # "AUTH_TOKEN_CLASSES": ("rest_framework_simplejwt.tokens.AccessToken",),
+    # "TOKEN_TYPE_CLAIM": "token_type",
+    # "TOKEN_USER_CLASS": "rest_framework_simplejwt.models.TokenUser",
 
-    "JTI_CLAIM": "jti",
+    # "JTI_CLAIM": "jti",
 
-    "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
-    "SLIDING_TOKEN_LIFETIME": timedelta(days=50),
-    "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=100),
+    # "SLIDING_TOKEN_REFRESH_EXP_CLAIM": "refresh_exp",
+    # "SLIDING_TOKEN_LIFETIME": timedelta(days=50),
+    # "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=100),
 
-    "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
-    "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
-    "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
-    "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
-    "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
-    "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
+    # "TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainPairSerializer",
+    # "TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSerializer",
+    # "TOKEN_VERIFY_SERIALIZER": "rest_framework_simplejwt.serializers.TokenVerifySerializer",
+    # "TOKEN_BLACKLIST_SERIALIZER": "rest_framework_simplejwt.serializers.TokenBlacklistSerializer",
+    # "SLIDING_TOKEN_OBTAIN_SERIALIZER": "rest_framework_simplejwt.serializers.TokenObtainSlidingSerializer",
+    # "SLIDING_TOKEN_REFRESH_SERIALIZER": "rest_framework_simplejwt.serializers.TokenRefreshSlidingSerializer",
 }
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+
+}
+
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -218,3 +221,13 @@ CELERY_BROKER_URL = "redis://127.0.0.1:6379/0"
 CELERY_RESULT_BACKEND = "redis://127.0.0.1:6379/0"
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
+
+SWAGGER_SETTINGS = {
+   'SECURITY_DEFINITIONS': {
+      'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+      }
+   }
+}

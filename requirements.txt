@@ -10,3 +10,4 @@ redis
 celery
 django_celery_beat
 flower
+gunicorn
